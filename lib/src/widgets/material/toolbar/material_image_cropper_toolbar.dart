@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:croppy/croppy.dart';
 import 'package:croppy/src/widgets/material/toolbar/material_rotation_slider.dart';
-import 'package:flutter/material.dart';
 
 class MaterialImageCropperToolbar extends StatelessWidget {
   const MaterialImageCropperToolbar({super.key, required this.controller});

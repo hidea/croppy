@@ -1,5 +1,6 @@
-import 'package:croppy/src/src.dart';
 import 'package:flutter/material.dart';
+
+import 'package:croppy/src/src.dart';
 
 class MaterialImageCropperBottomAppBar extends StatelessWidget {
   const MaterialImageCropperBottomAppBar({

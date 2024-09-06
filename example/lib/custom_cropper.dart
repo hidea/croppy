@@ -1,7 +1,8 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
-import 'package:croppy/croppy.dart';
 import 'package:flutter/material.dart';
+
+import 'package:croppy/croppy.dart';
 
 Future<CropImageResult?> showCustomCropper(
   BuildContext context,

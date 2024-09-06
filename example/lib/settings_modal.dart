@@ -1,5 +1,6 @@
-import 'package:croppy/croppy.dart';
 import 'package:flutter/material.dart';
+
+import 'package:croppy/croppy.dart';
 
 class CropSettings {
   CropSettings({
@@ -89,10 +90,11 @@ class _SettingsModalWidgetState extends State<SettingsModalWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
         Navigator.of(context).pop(_settings);
-        return false;
       },
       child: SingleChildScrollView(
         child: ListBody(
