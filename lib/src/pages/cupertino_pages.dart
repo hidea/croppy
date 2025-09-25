@@ -36,6 +36,9 @@ import 'package:flutter/cupertino.dart';
 ///
 /// The [locale] is used to localize the UI. If not provided, the locale from
 /// the [WidgetsApp] is used.
+/// 
+/// [showGestureHandlesOn] controls which crop shape types should show crop
+/// handles. By default, only AABB (rectangular) crop shapes show crop handles.
 ///
 /// You can use the [themeData] to customize the appearance of the cropper. If
 /// none is provided, a new CupertinoThemeData will be constructed internally
@@ -52,6 +55,8 @@ Future<CropImageResult?> showCupertinoImageCropper(
   bool shouldPopAfterCrop = true,
   Locale? locale,
   CupertinoThemeData? themeData,
+  bool showLoadingIndicatorOnSubmit = false,
+  List<CropShapeType> showGestureHandlesOn = const [CropShapeType.aabb],
 }) async {
   late final CroppableImageData _initialData;
 
@@ -76,9 +81,11 @@ Future<CropImageResult?> showCupertinoImageCropper(
         enabledTransformations: enabledTransformations,
         builder: (context, controller) => CupertinoImageCropperPage(
           heroTag: heroTag,
+          showLoadingIndicatorOnSubmit: showLoadingIndicatorOnSubmit,
           controller: controller,
           shouldPopAfterCrop: shouldPopAfterCrop,
           themeData: themeData,
+          showGestureHandlesOn: showGestureHandlesOn,
         ),
       ),
     );

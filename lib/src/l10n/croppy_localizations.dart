@@ -2,10 +2,7 @@ import 'package:croppy/src/src.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-enum LocalizationDirection {
-  vertical,
-  horizontal,
-}
+enum LocalizationDirection { vertical, horizontal }
 
 abstract class CroppyLocalizations {
   CroppyLocalizations(this.localeName);
@@ -31,6 +28,8 @@ abstract class CroppyLocalizations {
     Locale('he'),
     Locale('zh'),
     Locale('de'),
+    Locale('fa'),
+    Locale('tr'),
   ];
 
   /// Defaults to °
@@ -122,6 +121,10 @@ CroppyLocalizations lookupCroppyLocalizations(Locale locale) {
       return CroppyLocalizationsZh();
     case 'de':
       return CroppyLocalizationsDe();
+    case 'fa':
+      return CroppyLocalizationsFa();
+    case 'tr':
+      return CroppyLocalizationsTr();
   }
 
   if (kDebugMode) {

@@ -1,3 +1,36 @@
+## 1.4.0
+
+* Updated `compileSdkVersion` to `36` (thanks @jimmyff and @kaiquecruz)!
+* Updated `Gradle` to `8.13` (thanks @jimmyff and @kaiquecruz)!
+* Updated `ndkVersion` to `27.0.12077973` (thanks @jimmyff and @kaiquecruz)!
+* Updated `minSdkVersion` to `23` (thanks @jimmyff and @kaiquecruz)!
+* Ensured 16kb memory page size compatibility on Android
+* Added Turkish localization (thanks @BayramYARIM)!
+* Fix a null-check operator issue on resize (thanks @tusharbhambere)!
+
+## 1.3.6
+
+* Added a parameter called `showGestureHandlesOn` to control for which crop shapes the gesture handles should be shown. This allows you to, for example, show the rectangular gesture handles on a circular crop shape. Thanks @denysbohatyrov!
+* Added Persian localization (thanks @mdpe-ir)!
+* Added an `showAdaptiveImageCropper` method that will automatically launch the correct cropper depending on the platform.
+* Fixed a couple of issues with multiple transformations being applied at the same time.
+
+## 1.3.5
+
+* Added minimum crop dimension, which can be specified with the `minimumCropDimension` parameter. Defaults to 8.0. Any attempt to transform the crop rect to a size smaller than this will be ignored.
+
+## 1.3.4
+
+* Added mouse wheel and trackpad zooming (thanks @denysbohatyrov!).
+
+## 1.3.3
+
+* Reverted changes to `.withValues` and `.a` usage on colors, since the package currently targets Flutter 3.24
+
+## 1.3.2
+
+* Added `showLoadingIndicatorOnSubmit` parameter to show a loading indicator when the user presses the "Done" button. This is useful if you're doing some heavy processing on the cropped image and want to show the user that something is happening.
+
 ## 1.3.1
 
 * Added German localization (thanks @jkoenig134)! 

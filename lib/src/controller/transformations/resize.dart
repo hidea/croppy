@@ -9,10 +9,15 @@ mixin ResizeTransformation on BaseCroppableImageController {
   bool _isResizing = false;
 
   /// Called when the user starts resizing the crop rect.
+  ///
+  /// Returns `false` if the resize operation should be cancelled.
   @mustCallSuper
-  void onResizeStart() {
+  bool onResizeStart() {
+    if (isTransforming) return false;
+
     onTransformationStart();
     _isResizing = true;
+    return true;
   }
 
   @protected
@@ -93,6 +98,27 @@ mixin ResizeTransformation on BaseCroppableImageController {
         break;
     }
 
+    // Apply checks for minimum crop dimension
+    final normalizedSize = normalizeCropSize(newRect.size);
+
+    if (newRect.width != normalizedSize.width) {
+      newRect = Rect.fromLTWH(
+        rect.left,
+        newRect.top,
+        normalizedSize.width,
+        newRect.height,
+      );
+    }
+
+    if (newRect.height != normalizedSize.height) {
+      newRect = Rect.fromLTWH(
+        newRect.left,
+        rect.top,
+        newRect.width,
+        normalizedSize.height,
+      );
+    }
+
     return data.copyWithProperCropShape(
       cropShapeFn: cropShapeFn,
       cropRect: newRect,
@@ -105,6 +131,8 @@ mixin ResizeTransformation on BaseCroppableImageController {
     required Offset offsetDelta,
     required ResizeDirection direction,
   }) {
+    if (!_isResizing) return;
+
     data = onResizeImpl(
       data: data,
       offsetDelta: offsetDelta,
@@ -117,6 +145,8 @@ mixin ResizeTransformation on BaseCroppableImageController {
   /// Called when the user ends resizing the crop rect.
   @mustCallSuper
   void onResizeEnd() {
+    if (!_isResizing) return;
+    
     _isResizing = false;
     onTransformationEnd();
   }

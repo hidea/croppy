@@ -36,6 +36,9 @@ import 'package:flutter/material.dart';
 ///
 /// The [locale] is used to localize the UI. If not provided, the locale from
 /// the [WidgetsApp] is used.
+/// 
+/// /// [showGestureHandlesOn] controls which crop shape types should show crop
+/// handles. By default, only AABB (rectangular) crop shapes show crop handles.
 ///
 /// You can use the [themeData] to customize the appearance of the cropper. If
 /// none is provided, a new ThemeData will be constructed internally based on
@@ -52,6 +55,8 @@ Future<CropImageResult?> showMaterialImageCropper(
   bool shouldPopAfterCrop = true,
   Locale? locale,
   ThemeData? themeData,
+  bool showLoadingIndicatorOnSubmit = false,
+  List<CropShapeType> showGestureHandlesOn = const [CropShapeType.aabb],
 }) async {
   late final CroppableImageData _initialData;
 
@@ -78,7 +83,9 @@ Future<CropImageResult?> showMaterialImageCropper(
           heroTag: heroTag,
           controller: controller,
           shouldPopAfterCrop: shouldPopAfterCrop,
+          showLoadingIndicatorOnSubmit: showLoadingIndicatorOnSubmit,
           themeData: themeData,
+          showGestureHandlesOn: showGestureHandlesOn,
         ),
       ),
     );

@@ -9,10 +9,15 @@ mixin PanAndScaleTransformation on BaseCroppableImageController {
   bool _isPanAndScaling = false;
 
   /// Called when the user starts panning and scaling.
+  ///
+  /// Returns `false` if the pan and scale operation should be cancelled.
   @mustCallSuper
-  void onPanAndScaleStart() {
+  bool onPanAndScaleStart() {
+    if (isTransforming) return false;
+
     onTransformationStart();
     _isPanAndScaling = true;
+    return true;
   }
 
   @protected
@@ -24,11 +29,14 @@ mixin PanAndScaleTransformation on BaseCroppableImageController {
     final scaledOffsetDelta = offsetDelta / viewportScale;
 
     final rect = data.cropRect;
+    final size = normalizeCropSize(
+      Size(rect.width / scaleDelta, rect.height / scaleDelta),
+    );
 
     final newRect = Rect.fromCenter(
       center: rect.center + scaledOffsetDelta,
-      width: rect.width / scaleDelta,
-      height: rect.height / scaleDelta,
+      width: size.width,
+      height: size.height,
     );
 
     return data.copyWithProperCropShape(
@@ -43,6 +51,8 @@ mixin PanAndScaleTransformation on BaseCroppableImageController {
     required double scaleDelta,
     required Offset offsetDelta,
   }) {
+    if (!_isPanAndScaling) return;
+
     data = onPanAndScaleImpl(
       data: data,
       scaleDelta: scaleDelta,
@@ -55,6 +65,8 @@ mixin PanAndScaleTransformation on BaseCroppableImageController {
   /// Called when the user ends panning and scaling.
   @mustCallSuper
   void onPanAndScaleEnd() {
+    if (!_isPanAndScaling) return;
+
     _isPanAndScaling = false;
     onTransformationEnd();
   }

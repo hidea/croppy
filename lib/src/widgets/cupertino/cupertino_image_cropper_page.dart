@@ -11,15 +11,19 @@ class CupertinoImageCropperPage extends StatelessWidget {
     super.key,
     required this.controller,
     required this.shouldPopAfterCrop,
+    required this.showGestureHandlesOn,
     this.gesturePadding = 16.0,
     this.heroTag,
     this.themeData,
+    this.showLoadingIndicatorOnSubmit = false,
   });
 
   final CroppableImageController controller;
   final double gesturePadding;
   final Object? heroTag;
   final bool shouldPopAfterCrop;
+  final bool showLoadingIndicatorOnSubmit;
+  final List<CropShapeType> showGestureHandlesOn;
 
   final CupertinoThemeData? themeData;
 
@@ -63,6 +67,7 @@ class CupertinoImageCropperPage extends StatelessWidget {
                               CupertinoImageCropHandles(
                             controller: controller,
                             gesturePadding: gesturePadding,
+                            showGestureHandlesOn: showGestureHandlesOn,
                           ),
                         ),
                       ),
@@ -83,6 +88,8 @@ class CupertinoImageCropperPage extends StatelessWidget {
                               CupertinoImageCropperBottomAppBar(
                                 controller: controller,
                                 shouldPopAfterCrop: shouldPopAfterCrop,
+                                showLoadingIndicatorOnSubmit:
+                                    showLoadingIndicatorOnSubmit,
                               ),
                             ],
                           ),
