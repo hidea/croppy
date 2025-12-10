@@ -176,7 +176,7 @@ enum CupertinoCroppableImageToolbar { transform, aspectRatio }
 
 List<CropAspectRatio?> _createDefaultAspectRatios(Size imageSize) {
   if (kDebugMode) {
-    print('_createDefaultAspectRatios imageSize: $imageSize');
+    print('cupertino:_createDefaultAspectRatios imageSize: $imageSize');
   }
   return [
     CropAspectRatio(

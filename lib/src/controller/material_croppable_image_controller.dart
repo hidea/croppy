@@ -2,7 +2,8 @@ import 'package:croppy/src/src.dart';
 import 'package:flutter/material.dart';
 
 class MaterialCroppableImageController
-    extends CroppableImageControllerWithMixins with AnimatedControllerMixin {
+    extends CroppableImageControllerWithMixins
+    with AnimatedControllerMixin {
   MaterialCroppableImageController({
     required TickerProvider vsync,
     required super.imageProvider,
@@ -13,7 +14,7 @@ class MaterialCroppableImageController
     super.minimumCropDimension,
     List<CropAspectRatio?>? allowedAspectRatios,
   }) : allowedAspectRatios =
-            allowedAspectRatios ?? _createDefaultAspectRatios(data.imageSize) {
+           allowedAspectRatios ?? _createDefaultAspectRatios(data.imageSize) {
     initAnimationControllers(vsync);
     maybeSetAspectRatioOnInit();
   }
@@ -51,9 +52,7 @@ class MaterialCroppableImageController
       aspectRatio: currentAspectRatio?.ratio,
     );
 
-    newData = newData.copyWith(
-      cropRect: newAabb.rect,
-    );
+    newData = newData.copyWith(cropRect: newAabb.rect);
 
     return newData;
   }
@@ -76,9 +75,7 @@ class MaterialCroppableImageController
   }
 
   @override
-  void onStraighten({
-    required double angleRad,
-  }) {
+  void onStraighten({required double angleRad}) {
     super.onStraighten(angleRad: angleRad);
     normalize();
     setViewportScale();
@@ -86,6 +83,9 @@ class MaterialCroppableImageController
 }
 
 List<CropAspectRatio?> _createDefaultAspectRatios(Size imageSize) {
+  if (kDebugMode) {
+    print('material:_createDefaultAspectRatios imageSize: $imageSize');
+  }
   return [
     null,
     CropAspectRatio(
