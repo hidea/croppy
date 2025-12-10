@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:croppy/src/src.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 /// A croppable image controller that is similar to the iOS Photos app.
 class CupertinoCroppableImageController
@@ -176,9 +175,6 @@ class CupertinoCroppableImageController
 enum CupertinoCroppableImageToolbar { transform, aspectRatio }
 
 List<CropAspectRatio?> _createDefaultAspectRatios(Size imageSize) {
-  if (kDebugMode) {
-    print('cupertino:_createDefaultAspectRatios imageSize: $imageSize');
-  }
   return [
     CropAspectRatio(
       width: imageSize.width.round(),

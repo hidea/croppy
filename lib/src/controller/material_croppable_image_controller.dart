@@ -1,6 +1,5 @@
 import 'package:croppy/src/src.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 class MaterialCroppableImageController
     extends CroppableImageControllerWithMixins
@@ -84,9 +83,6 @@ class MaterialCroppableImageController
 }
 
 List<CropAspectRatio?> _createDefaultAspectRatios(Size imageSize) {
-  if (kDebugMode) {
-    print('material:_createDefaultAspectRatios imageSize: $imageSize');
-  }
   return [
     null,
     CropAspectRatio(

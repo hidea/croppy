@@ -199,7 +199,8 @@ mixin AspectRatioMixin on CroppableImageController {
   void maybeSetAspectRatioOnInit() {
     // If the current aspect ratio is not allowed, set it to the first allowed
     // aspect ratio.
-    if (!allowedAspectRatios.contains(currentAspectRatio)) {
+    if (currentAspectRatio == null ||
+        !allowedAspectRatios.contains(currentAspectRatio)) {
       aspectRatioNotifier.value = allowedAspectRatios.first;
 
       final newCropRect = resizeCropRectWithAspectRatio(
