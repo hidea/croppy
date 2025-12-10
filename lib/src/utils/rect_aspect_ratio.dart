@@ -19,9 +19,14 @@ Rect resizeCropRectWithAspectRatio(
     cropRect.height,
   );
 
-  final newSize = newSizeFromWidth.area > newSizeFromHeight.area
-      ? newSizeFromWidth
-      : newSizeFromHeight;
+  //final newSize = newSizeFromWidth.area > newSizeFromHeight.area
+  //    ? newSizeFromWidth
+  //    : newSizeFromHeight;
+  // アスペクト比が近い方を選ぶように修正
+  final cropRectAspectRatio = cropRect.width / cropRect.height;
+  final diffWidth = (cropRectAspectRatio - newAspectRatioValue).abs();
+  final diffHeight = (1 / cropRectAspectRatio - newAspectRatioValue).abs();
+  final newSize = diffWidth < diffHeight ? newSizeFromWidth : newSizeFromHeight;
 
   final newRect = Rect.fromCenter(
     center: cropRect.center,
