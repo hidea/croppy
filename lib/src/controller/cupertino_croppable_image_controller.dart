@@ -17,7 +17,7 @@ class CupertinoCroppableImageController
     super.minimumCropDimension,
     List<CropAspectRatio?>? allowedAspectRatios,
   }) : allowedAspectRatios =
-            allowedAspectRatios ?? _createDefaultAspectRatios(data.imageSize) {
+           allowedAspectRatios ?? _createDefaultAspectRatios(data.imageSize) {
     initAnimationControllers(vsync);
     maybeSetAspectRatioOnInit();
   }
@@ -34,56 +34,44 @@ class CupertinoCroppableImageController
   );
 
   @override
-  void onStraighten({
-    required double angleRad,
-  }) {
+  void onStraighten({required double angleRad}) {
     if (isRotatingZ) {
       super.onStraighten(angleRad: angleRad);
       normalize();
       setViewportScale();
     } else {
-      animatedNormalizeAfterTransform(
-        () {
-          super.onStraighten(angleRad: angleRad);
-          normalize();
-        },
-      );
+      animatedNormalizeAfterTransform(() {
+        super.onStraighten(angleRad: angleRad);
+        normalize();
+      });
     }
   }
 
   @override
-  void onRotateX({
-    required double angleRad,
-  }) {
+  void onRotateX({required double angleRad}) {
     if (isRotatingX) {
       super.onRotateX(angleRad: angleRad);
       normalize();
       setViewportScale();
     } else {
-      animatedNormalizeAfterTransform(
-        () {
-          super.onRotateX(angleRad: angleRad);
-          normalize();
-        },
-      );
+      animatedNormalizeAfterTransform(() {
+        super.onRotateX(angleRad: angleRad);
+        normalize();
+      });
     }
   }
 
   @override
-  void onRotateY({
-    required double angleRad,
-  }) {
+  void onRotateY({required double angleRad}) {
     if (isRotatingY) {
       super.onRotateY(angleRad: angleRad);
       normalize();
       setViewportScale();
     } else {
-      animatedNormalizeAfterTransform(
-        () {
-          super.onRotateY(angleRad: angleRad);
-          normalize();
-        },
-      );
+      animatedNormalizeAfterTransform(() {
+        super.onRotateY(angleRad: angleRad);
+        normalize();
+      });
     }
   }
 
@@ -184,12 +172,12 @@ class CupertinoCroppableImageController
   }
 }
 
-enum CupertinoCroppableImageToolbar {
-  transform,
-  aspectRatio,
-}
+enum CupertinoCroppableImageToolbar { transform, aspectRatio }
 
 List<CropAspectRatio?> _createDefaultAspectRatios(Size imageSize) {
+  if (kDebugMode) {
+    print('_createDefaultAspectRatios imageSize: $imageSize');
+  }
   return [
     CropAspectRatio(
       width: imageSize.width.round(),
