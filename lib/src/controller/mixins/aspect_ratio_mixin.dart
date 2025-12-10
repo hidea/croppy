@@ -178,8 +178,15 @@ mixin AspectRatioMixin on CroppableImageController {
     if (aspectRatioNotifier.value == newAspectRatio) return;
 
     aspectRatioNotifier.value = newAspectRatio;
+
+    // オリジナル選択時は画像全体を基準にする
+    final isOriginal =
+        allowedAspectRatios.isNotEmpty &&
+        newAspectRatio == allowedAspectRatios.first;
+    final imageRect = Rect.fromLTWH(0, 0, imageSize.width, imageSize.height);
+
     final newCropRect = resizeCropRectWithAspectRatio(
-      data.cropRect,
+      isOriginal ? imageRect : data.cropRect,
       newAspectRatio,
     );
 
